@@ -1,5 +1,5 @@
 # RV Smart Control
-RV Smart Control is a LIN-bus based control system for recreational vehicles. By now it runs on an Arduino Nano, utilizes an extra *LINBUS Breakout - skpang.co.uk* board and a *CJMCU-111* rotary input device. (I wrote an Arduino demo which shows the latter one interrupt driven.) Furhtermore a *ST7735 Display* is used to show the menu driven control.
+RV Smart Control is a LIN-bus based control system for recreational vehicles. By now it runs on an Arduino Nano, utilizes an extra *LINBUS Breakout - skpang.co.uk* (http://skpang.co.uk/catalog/linbus-breakout-board-p-1417.html) board and a *CJMCU-111* rotary input device. (I wrote an Arduino demo which shows the latter one interrupt driven.) Furhtermore a *ST7735 Display* is used to show the menu driven control.
 Later on there will be a port to a NodeMCU which runs an Espressif Esp8266 controller that is much faster and got way more flash memory connected.
 
 ## Developer information
