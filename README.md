@@ -1,6 +1,7 @@
 # RV Smart Control
-RV Smart Control is a LIN-bus based control system for recreational vehicles. By now it runs on an Arduino Nano, utilizes an extra *LINBUS Breakout - skpang.co.uk* (http://skpang.co.uk/catalog/linbus-breakout-board-p-1417.html) board and a *CJMCU-111* rotary input device. (I wrote an Arduino demo which shows the latter one interrupt driven.) Furhtermore a *ST7735 Display* is used to show the menu driven control.
-Later on there will be a port to a NodeMCU which runs an Espressif Esp8266 controller that is much faster and got way more flash memory connected.
+RV Smart Control is a LIN-bus based control system for recreational vehicles. It runs on an ESP32 (NodeMCU-ESP32/ESP32 DEVKITV1), utilizes an extra *LINBUS Breakout - skpang.co.uk* (http://skpang.co.uk/catalog/linbus-breakout-board-p-1417.html) board and a *CJMCU-111* rotary input device. (I wrote an Arduino demo which shows the latter one interrupt driven.)
+Furhtermore an *ILI9341 Display* (320x240 px) is used to show the menu driven control.
+
 
 ## Developer information
 ### Software
@@ -8,10 +9,9 @@ This is a PlatformIO project, developed using Atom editor (atom.io)-
 To make it compile first run the following commands to install dependencies:
 pio lib install "adafruit/Adafruit GFX Library"
 pio lib install "adafruit/Adafruit BusIO"
-pio lib install "adafruit/Adafruit ST7735 and ST7789 Library"
-pio lib install "rocketscream/Low-Power"
+...[TBD]
 
-The complete code is auto formatted using "atom-beutify", which is installed like this:
+The complete code is auto formatted using "atom-beautify", which is installed like this:
 apm install atom-beautify
 Selected auto formatter is "uncrustify" with default settings.
    
