@@ -1,6 +1,6 @@
 # RV Smart Control
 RV Smart Control is a LIN-bus based control system for recreational vehicles. It runs on an ESP32 (NodeMCU-ESP32/ESP32 DEVKITV1), utilizes an extra *LINBUS Breakout - skpang.co.uk* (http://skpang.co.uk/catalog/linbus-breakout-board-p-1417.html) board and a *CJMCU-111* rotary input device. (I wrote an Arduino demo which shows the latter one interrupt driven.)
-Furhtermore an *ILI9341 Display* (320x240 px) is used to show the menu driven control.
+Furhtermore an *ILI9341 Display* (320x240 px) is used to show the menu driven control and a "GY-91 10DOF Accelerometer Gyroscope Compass Temp/Pressure MPU-9250 BMP-280" combined sensor board is connected to aquire environmental information.
 
 
 ## Developer information
