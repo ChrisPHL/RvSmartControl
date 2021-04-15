@@ -14,9 +14,9 @@ Furhtermore an *ILI9341 Display* (320x240 px) is used to show the menu driven co
 ### Software
 This is a PlatformIO project, developed using Atom editor (atom.io)-
 To make it compile first run the following commands to install dependencies:
-pio lib install "adafruit/Adafruit GFX Library"
-pio lib install "adafruit/Adafruit BusIO"
-...[TBD]
+* pio lib install "adafruit/Adafruit GFX Library"
+* pio lib install "adafruit/Adafruit BusIO"
+* ...[TBD]
 
 The complete code is auto formatted using "atom-beautify", which is installed like this:
 apm install atom-beautify
