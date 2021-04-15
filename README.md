@@ -24,7 +24,7 @@ Selected auto formatter is "uncrustify" with default settings.
    
 ### Hardware
 
-** Schematic of the rotary button**
+**Schematic of the rotary button**
 * https://easyeda.com/hogo20/CJMCU-111-rotary-encoder-schematic
 * Solder a 330 Ohm (+-5%) from pin 1 to pin 4 of the CJMCU-111 rotary encoder switch. In other words: Lower the value of bottom most resistor. This way a button push can be detected bei the logic level input GPIO.
 
