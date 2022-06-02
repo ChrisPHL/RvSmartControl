@@ -4,7 +4,7 @@ Furhtermore an *ILI9341 Display* (320x240 px) is used to show the menu driven co
 
 ## Part list
 * NodeMCU-ESP32/ESP32 DEVKITV1
-* LINBUS Breakout board http://skpang.co.uk/catalog/linbus-breakout-board-p-1417.html
+* LINBUS Breakout board https://www.skpang.co.uk/products/lin-bus-breakout-board
 * USB Step Down DC-DC Spannungswandler 6-24V zu 5V 3A Arduino Spannungsregler
 * 2.8 Inch ILI9341 240x320 SPI TFT LCD Display Touch Panel SPI Serial Port Module
 * CJMCU-111 DC 5V Push Button Switch Rotary Encoder / Momentary Push Switch
