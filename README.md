@@ -1,68 +1,101 @@
 # RV Smart Control
-RV Smart Control is a LIN-bus based control system for recreational vehicles. It runs on an ESP32 (NodeMCU-ESP32/ESP32 DEVKITV1), utilizes an extra *LINBUS Breakout board* and a *CJMCU-111* rotary input device. (I wrote an Arduino demo which shows the latter one interrupt driven.)
-Furhtermore an *ILI9341 Display* (320x240 px) is used to show the menu driven control and a combined sensor board is connected to aquire environmental information.
+RV Smart Control is a LIN-bus based control system for recreational vehicles. It runs on an ESP32 (NodeMCU-ESP32/ESP32 DEVKITV1), utilizes an extra LINBUS Breakout board and a CJMCU-111 rotary input device. (I wrote an [Arduino demo which shows the latter one interrupt driven](https://github.com/ChrisPHL/CJMCU-111-rotary-button-demo).) Furhtermore an ILI9341 Display (320x240 px) is used to show the menu driven control and a combined sensor board is connected to aquire environmental information.
 
-## Part list
-* NodeMCU-ESP32/ESP32 DEVKITV1
-* LINBUS Breakout board https://www.skpang.co.uk/products/lin-bus-breakout-board
-* USB Step Down DC-DC Spannungswandler 6-24V zu 5V 3A Arduino Spannungsregler
-* 2.8 Inch ILI9341 240x320 SPI TFT LCD Display Touch Panel SPI Serial Port Module
-* CJMCU-111 DC 5V Push Button Switch Rotary Encoder / Momentary Push Switch
-* GY-91 10DOF Accelerometer Gyroscope Compass Temp/Pressure MPU-9250 BMP-280
+## Part List
+Please note: The links are just to showcase the components. You may buy your parts elsewhere, of course.
+* NodeMCU-ESP32 - https://joy-it.net/de/products/SBC-NodeMCU-ESP32
+* LIN-Bus breakout board - https://buyzero.de/products/lin-bus-breakout-board 
+* USB Step Down DC-DC Spannungswandler 6-24V zu 5V 3A Arduino Spannungsregler - https://www.makershop.de/module/step-downup/6-24v-usb-spannungswandler/
+* 2.8 Inch ILI9341 240x320 SPI TFT LCD Display Touch Panel SPI Serial Port Module - http://www.lcdwiki.com/2.8inch_SPI_Module_ILI9341_SKU:MSP2807
+* CJMCU-111 DC 5V Push Button Switch Rotary Encoder / Momentary Push Switch - https://funduinoshop.com/elektronische-module/keypads-und-buttons/rotary-encoder/rotary-encoder-cjmcu-111
+* GY-91 - https://artofcircuits.com/product 10dof-gy-91-4-in-1-mpu-9250-and-bmp280-multi-sensor-module
 
-## Developer information
-### Software
-This is a PlatformIO project, developed using Atom editor (atom.io)-
-To make it compile first run the following commands to install dependencies:
-* pio lib install "adafruit/Adafruit GFX Library"
-* pio lib install "adafruit/Adafruit BusIO"
-* ...[TBD]
 
-The complete code is auto formatted using "atom-beautify", which is installed like this:
+## Software
+This is a PlatformIO project, developed using VSCodium editor with PlatformIO IDE extension. To install PlatformIO IDE extension you might need to activate the M$ extension maketplace for VSCode This procedure is described here: https://github.com/VSCodium/vscodium/blob/master/DOCS.md#how-to-use-the-vs-code-marketplace.
+
+### Prerequisits
+Prior to compile you need to run once the following commands to install dependencies:
+* pio pkg install -l "adafruit/Adafruit ILI9341"
+* pio pkg install -l "adafruit/Adafruit BMP280 Library"
+* pio pkg install -l "hideakitai/MPU9250"
+* pio pkg install -l "adafruit/Adafruit BusIO"
+
+The complete code is auto formatted using "atom-beutify", which is installed like this:
 apm install atom-beautify
 Selected auto formatter is "uncrustify" with default settings.
-   
-### Hardware
 
-**Schematic of the rotary button**
-* https://easyeda.com/hogo20/CJMCU-111-rotary-encoder-schematic
-* Solder a 330 Ohm (+-5%) from pin 1 to pin 4 of the CJMCU-111 rotary encoder switch. In other words: Lower the value of bottom most resistor. This way a button push can be detected bei the logic level input GPIO.
+### 3rd Party Libraries
 
-This hardware description comes from https://github.com/frankschoeniger/LIN_Interface as I found it very good and this project is slightly inspired by "LIN_Interface".
+## Hardware
+This hardware description comes from https://github.com/frankschoeniger/LIN_Interface as I found it very good and the this project is slightly inspired by "LIN_interface". This description uses an Arduino Nano running the code.
 
-**LINBUS Breakout board**
+### Wiring Of The Components
+TODO: Create Fritzing project to illustrate the wiring.
 
-|PIN LIN    |  PIN NodeMCU-ESP32 |
-|-----------|--------------------|
-| GND       |  GND |  
-| CS        |  2                 |
-| FAULT     |  VCC *+5V*  |
-| TxD       |  3                 |
-| RxD       |  4                 |
-| VCC       |  Vcc *+5V* |
+*LINBUS Breakout - skpang.co.uk*
 
-**Connector 2 on LIN Breakout:**
-
-- UBat --> + Akku
-- LIN  --> IBS PIN 2
-- GND  --> GNC Connector Sensor not Akku !!
+|  PIN LIN  |  PIN NodeMCU-ESP32  |
+|-----------|---------------------|
+|  GND      |  GND                |  
+|  CS       |  D12                |
+|  FAULT    |  not connected      |
+|  TxD      |  TX2                |
+|  RxD      |  RX2                |
+|  VCC      |  D14                |
 
 
-**Hella IBS 200X Sensor**
+*Connector 2 on LIN Breakout*
 
-- PIN1: --> + Akku
-- PIN2: --> LIN Bus
+|  PIN LIN  |  PIN IBS / Car        |
+|-----------|-----------------------|
+|  UBat     |  Batttery +12V        |  
+|  LIN      |  IBS PIN 2            |
+|  GND      |  GND terminal of IBS  |
 
 
-**Display**
+*Hella IBS 200X Sensor*
 
-|PIN Display  |  PIN Arduin Nano|
-|---|----|
-|LED          |  VCC +5V |
-|SCK          |  13 |
-|SDA          |  11 |
-|A0 *(DC)*      |  9 |
-|Reset RST    |  8 |
-|CS           |  10 |
-GND          |  GND
-VCC          |  VCC +5V
+|  IBS      |  PIN IBS / LINBUS breakout  |
+|-----------|-----------------------------|
+|  PIN1     |  Batttery +12V              |  
+|  PIN2     |  LIN                        |
+
+
+*ILI9341 TFT Display*
+
+|  PIN Display  |  PIN NodeMCU-ESP32  |
+|---------------|---------------------|
+|  VCC          |  D27                |
+|  GND          |  GND                |
+|  CS           |  D32                |
+|  RESET        |  D25                |
+|  D/C          |  D33                |
+|  SDI(MOSI)    |  D23                |
+|  SCK          |  D18                |
+|  LED          |  D26                |
+|  SDO(MOSI)    |  D19                |
+
+
+ *GY-91 Sensor*
+
+|  PIN GY-91  |  PIN NodeMCU-ESP32  |
+|-------------|---------------------|
+|  VIN        |  not connected      |
+|  3V3        |  D13                |
+|  GND        |  GND                |
+|  SCL        |  D22                |
+|  SDA        |  D21                |
+|  SDD/SAO    |  D4                 |
+|  NCS        |  not connected      |
+|  CSB        |  not connected      |
+
+
+
+# Things to do
+There are allways things that one want to see included into this project. So for a long term plan I put some use cases to remember here: 
+* Control [Truma Combi heating devices](https://www.truma.com/int/en/products/truma-heater)
+* Integrate [DalyBMS UART Protocol](https://github.com/maland16/daly-bms-uart) over Serial2
+* Water level display utilizing the GY-91 multi sensor.
+
+If you have done some work on that allready or if you just want to contribute to the project in any way, feel free to file a pull request or open an issue. 
