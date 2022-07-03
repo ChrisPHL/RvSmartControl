@@ -26,6 +26,7 @@ apm install atom-beautify
 Selected auto formatter is "uncrustify" with default settings.
 
 ### 3rd Party Libraries
+RvSmartControl uses the [RemoteDebug library](https://github.com/JoaoLopesF/RemoteDebug) make serial debugging obsolete and uses a websocket over WiFi instead. On the remote side you can use [RemoteDebugApp](https://github.com/JoaoLopesF/RemoteDebugApp) to receive debug messages and even control the debugging behaviour.
 
 ## Hardware
 This hardware description comes from https://github.com/frankschoeniger/LIN_Interface as I found it very good and the this project is slightly inspired by "LIN_interface". This description uses an Arduino Nano running the code.
