@@ -36,6 +36,8 @@ static uint16_t wifiStartWifiConfigX = 0;
 static uint16_t wifiStartWifiConfigY = 0;
 static uint16_t wifiSsidX = 0;
 static uint16_t wifiSsidY = 0;
+static uint16_t wifiIpX = 0;
+static uint16_t wifiIpY = 0;
 static uint16_t factoryResetX = 0;
 static uint16_t factoryResetY = 0;
 
@@ -59,6 +61,9 @@ void SetupMenu::printScreenImplementation(void) {
         adaIli9431->println("WiFi SSID: "); // SSID starts in new line since length exceeds display width.
         wifiSsidX = adaIli9431->getCursorX(); wifiSsidY = adaIli9431->getCursorY();
         adaIli9431->println();
+        adaIli9431->print ("WiFi IP: ");
+        wifiIpX = adaIli9431->getCursorX(); wifiIpY = adaIli9431->getCursorY();
+        adaIli9431->println();
         adaIli9431->println("Paired Bluetooth devices:");
         adaIli9431->print("  #1: ");
         adaIli9431->println(Persistence::getInstance().readSlot(kPSlotBluetoothPair1));
@@ -66,8 +71,6 @@ void SetupMenu::printScreenImplementation(void) {
         adaIli9431->println(Persistence::getInstance().readSlot(kPSlotBluetoothPair2));
         adaIli9431->print("  #3: ");
         adaIli9431->println(Persistence::getInstance().readSlot(kPSlotBluetoothPair3));
-        adaIli9431->print("  #4: ");
-        adaIli9431->println(Persistence::getInstance().readSlot(kPSlotBluetoothPair4));
         adaIli9431->println();
         adaIli9431->print("Factory reset: ");
         factoryResetX = adaIli9431->getCursorX(); factoryResetY = adaIli9431->getCursorY();
@@ -106,9 +109,11 @@ void SetupMenu::updateScreenImplementation(void) {
                 } else if (kWclsWifiUpAndRunning == WiFiController::getInstance().getState()) {
                         snprintf(string, sizeof string, "%-28s", Persistence ::getInstance().readSlot(kPSlotWiFiSsid).c_str());
                         updateDisplayText(string, wifiSsidX, wifiSsidY, Defaults.getFgColor(), Defaults.getBgColor());
+                        updateDisplayText(WiFiController::getInstance().getIpAddr().c_str(), wifiIpX, wifiIpY, Defaults.getFgColor(), Defaults.getBgColor());
                 } else {
                         snprintf(string, sizeof string, "%-28s", "unconfigured / disconnected");
                         updateDisplayText(string, wifiSsidX, wifiSsidY, Defaults.getFgColor(), Defaults.getBgColor());
+                        updateDisplayText("n/a", wifiIpX, wifiIpY, Defaults.getFgColor(), Defaults.getBgColor());
                 }
                 wifiSsidChanged = false;
         }

@@ -209,3 +209,7 @@ WiFiControllerLoopState WiFiController::getState(void) {
 void WiFiController::powerSave(void) {
         WiFi.disconnect(true); // bool wifioff = false, optional bool eraseap = false
 }
+
+String WiFiController::getIpAddr(void) {
+        return WiFi.localIP().toString();
+}

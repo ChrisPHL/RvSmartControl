@@ -70,6 +70,7 @@ class WiFiController
     void abortWifiConfig(void);
     WiFiControllerLoopState getState(void);
     void powerSave(void);
+    String getIpAddr(void);
 };
 
 
