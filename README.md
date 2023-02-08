@@ -8,7 +8,7 @@ Please note: The links are just to showcase the components. You may buy your par
 * USB Step Down DC-DC Spannungswandler 6-24V zu 5V 3A Arduino Spannungsregler - https://www.makershop.de/module/step-downup/6-24v-usb-spannungswandler/
 * 2.8 Inch ILI9341 240x320 SPI TFT LCD Display Touch Panel SPI Serial Port Module - http://www.lcdwiki.com/2.8inch_SPI_Module_ILI9341_SKU:MSP2807
 * CJMCU-111 DC 5V Push Button Switch Rotary Encoder / Momentary Push Switch - https://funduinoshop.com/elektronische-module/keypads-und-buttons/rotary-encoder/rotary-encoder-cjmcu-111
-* GY-91 - https://artofcircuits.com/product 10dof-gy-91-4-in-1-mpu-9250-and-bmp280-multi-sensor-module
+* GY-91 - https://artofcircuits.com/product/10dof-gy-91-4-in-1-mpu-9250-and-bmp280-multi-sensor-module
 
 
 ## Software
