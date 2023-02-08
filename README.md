@@ -50,7 +50,7 @@ TODO: Create Fritzing project to illustrate the wiring.
 
 |  PIN LIN  |  PIN IBS / Car        |
 |-----------|-----------------------|
-|  UBat     |  Batttery +12V        |  
+|  UBat     |  Battery +12V        |  
 |  LIN      |  IBS PIN 2            |
 |  GND      |  GND terminal of IBS  |
 
@@ -59,7 +59,7 @@ TODO: Create Fritzing project to illustrate the wiring.
 
 |  IBS      |  PIN IBS / LINBUS breakout  |
 |-----------|-----------------------------|
-|  PIN1     |  Batttery +12V              |  
+|  PIN1     |  Battery +12V              |  
 |  PIN2     |  LIN                        |
 
 
