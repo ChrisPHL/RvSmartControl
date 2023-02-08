@@ -335,7 +335,7 @@ void IbsMenu::inputLeft(void) {
 void IbsMenu::inputRight(void) {
         if (itemSelected) {
                 if (0 == selectionIndex) { // Nominal Capacity
-                        if (250 > nominalCapacitySetupValue) {
+                        if (249 > nominalCapacitySetupValue) {
                                 ++nominalCapacitySetupValue;
                         }
                 } else if (1 == selectionIndex) { // Battery Type
