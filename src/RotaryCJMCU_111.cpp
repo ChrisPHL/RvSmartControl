@@ -117,6 +117,7 @@ void ICACHE_RAM_ATTR isrGx(void) {
 
         volatile uint32_t rotationInputA = digitalRead(rotaryCjmcu111.rotaryPinGa);
         volatile uint32_t rotationInputB = digitalRead(rotaryCjmcu111.rotaryPinGb);
+        volatile uint32_t voltagePinGa = 0UL;
 
         isrGxTime = millis();
 
@@ -133,10 +134,25 @@ void ICACHE_RAM_ATTR isrGx(void) {
                 break;
 
         case kRotationStatusStartLorPush:
+                rotationStatus = kRotationStatusWaiting;
                 if (HIGH == rotationInputA && HIGH == rotationInputB) {
-                        rotationStatus = kRotationStatusWaiting;
-                        // TODO: if (rotaryCjmcu111.rotaryPinGaAnalog between 1.0 and 1.5 volts, then increment push count.
                         if ((isrGxTime - isrGxLastTime) > isrGxDebounceDuration) {
+                                // if (rotaryCjmcu111.rotaryPinGaAnalog between 1.0 and 1.5 volts, then increment push count.
+                                if (rotaryCjmcu111.pinGaShortToAnalog) {
+                                        // TODO: This code is untested / _not_ working yet.
+                                        voltagePinGa = analogRead(rotaryCjmcu111.rotaryPinGa);
+                                        pinMode(rotaryCjmcu111.rotaryPinGa, INPUT_PULLUP);
+
+                                        if (10 <= voltagePinGa && voltagePinGa <= 200) {
+                                                // Analog reading points to a simle push input instead of rotation.
+                                                if ((isrGxTime - isrGxLastTime) < isrGxLongPressDuration) {
+                                                        ++rotaryPushCount;
+                                                }
+                                        } else {
+                                                // Debug.trigger(3);
+                                                rotaryInputDetected = 1UL;
+                                        }
+                                }
                                 if ((isrGxTime - isrGxLastTime) < isrGxLongPressDuration) {
                                         ++rotaryPushCount;
                                 }

@@ -79,8 +79,9 @@ PowerSaver powerSaver;
 
 //######################################
 #include "RotaryCJMCU_111.h"
-const uint8_t ROTARY_PIN_GA = 35;
-const uint8_t ROTARY_PIN_GB = 34;
+const uint8_t ROTARY_PIN_GA = 35; // Named "GPIO35" / ADC7
+const uint8_t ROTARY_PIN_GA_ANALOG = A7; // Named "GPIO35" / ADC7
+const uint8_t ROTARY_PIN_GB = 34; // Named "GPIO34"
 
 //######################################
 // LIN
@@ -106,11 +107,11 @@ void setup(void)
         sleeping = false;
 
 
-        RotaryCJMCU_111::getInstance().setup(ROTARY_PIN_GA, ROTARY_PIN_GB);
+        RotaryCJMCU_111::getInstance().setup(ROTARY_PIN_GA, ROTARY_PIN_GB/* , ROTARY_PIN_GA_ANALOG */);
         if (RotaryCJMCU_111::getInstance().isButtonPushed()) {
                 // TODO: Let the user decide by long press if we shall use default WiFi data or try to read WiFi credentials from EEPROM.
                 Serial.println("Button pushed initially. Just starting WiFi and Rotary button controller.");
-                RotaryCJMCU_111::getInstance().setup(ROTARY_PIN_GA, ROTARY_PIN_GB);
+                RotaryCJMCU_111::getInstance().setup(ROTARY_PIN_GA, ROTARY_PIN_GB/* , ROTARY_PIN_GA_ANALOG */);
                 WiFiController::getInstance().setup();
                 WiFiController::getInstance().start();
                 return;
@@ -145,7 +146,6 @@ void loop(void)
                 yield();
                 return;
         }
-
 
         //######################################
         if (RotaryCJMCU_111::getInstance().isRotaryInputDetected()) {
@@ -194,9 +194,7 @@ void loop(void)
                         // mpu9250.verbose(false);
                 }
         }
-
         RotaryCJMCU_111::getInstance().loop();
-
 
         if (WiFiController::getInstance().loop()) {
                 if (300000 < millis()) {
@@ -205,7 +203,6 @@ void loop(void)
                 }
                 return;
         }
-
 
         if (!remoteDebugSetupDone && kWclsWifiUpAndRunning == WiFiController::getInstance().getState()) {
                 // WiFi connection is essential for starting the Remote Debugging Interface.
@@ -274,7 +271,7 @@ void powerSaveReturnMenu(void) {
 }
 
 /**
-   This i inspired by https://lastminuteengineers.com/esp32-deep-sleep-wakeup-sources/.
+   This is inspired by https://lastminuteengineers.com/esp32-deep-sleep-wakeup-sources/.
  */
 void powerSaveSleep(void) {
         Serial.println("powerSaveSleep()");

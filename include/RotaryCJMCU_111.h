@@ -25,7 +25,7 @@
 void isrGx(void);
 
 
-const uint8_t isrGxDebounceDuration = 2; // msec
+const uint8_t isrGxDebounceDuration = 3; // msec
 
 const uint16_t isrGxLongPressDuration = 1000; // msec
 
@@ -33,8 +33,6 @@ const uint16_t isrGxLongPressDuration = 1000; // msec
 class RotaryCJMCU_111
 {
   private:
-  bool pinGaShortToAnalog;
-
 
   RotaryCJMCU_111(void) {
           pinGaShortToAnalog = false;
@@ -45,15 +43,22 @@ class RotaryCJMCU_111
 
 
   void setup(void) {
-          resetRotaryInput();
+        resetRotaryInput();
 
-          pinMode(rotaryPinGa, INPUT_PULLUP);
-          digitalWrite(rotaryPinGa, HIGH);
-          pinMode(rotaryPinGb, INPUT_PULLUP);
-          digitalWrite(rotaryPinGb, HIGH);
+        pinMode(rotaryPinGa, INPUT_PULLUP);
+        digitalWrite(rotaryPinGa, HIGH);
+        pinMode(rotaryPinGb, INPUT_PULLUP);
+        digitalWrite(rotaryPinGb, HIGH);
 
-          attachInterrupt(digitalPinToInterrupt(rotaryPinGa), isrGx, CHANGE);
-          attachInterrupt(digitalPinToInterrupt(rotaryPinGb), isrGx, CHANGE);
+        if (pinGaShortToAnalog) {
+                analogReadResolution(12);
+                analogSetWidth(12);
+                analogSetCycles(8);
+                analogSetSamples(1);
+                analogSetClockDiv(1);
+        }
+        attachInterrupt(digitalPinToInterrupt(rotaryPinGa), isrGx, CHANGE);
+        attachInterrupt(digitalPinToInterrupt(rotaryPinGb), isrGx, CHANGE);
   }
 
   public:
@@ -64,6 +69,7 @@ class RotaryCJMCU_111
 
   volatile uint8_t rotaryPinGa;
   volatile uint8_t rotaryPinGb;
+  volatile bool pinGaShortToAnalog;
   volatile uint8_t rotaryPinGaAnalog;
 
   void setup(uint8_t pinGa, uint8_t pinGb);
