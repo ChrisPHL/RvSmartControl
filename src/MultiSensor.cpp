@@ -73,7 +73,7 @@ void MultiSensor::setup(void) {
                         print_mpu9250_calibration();
                         mpu9250.verbose(false);
                 } else {
-                        Serial.println("but conection failed.");
+                        Serial.println("but connection failed.");
                 }
         } else {
                 Serial.println("MPU9250 initialization failed.");
