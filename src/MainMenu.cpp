@@ -16,7 +16,9 @@
  */
 
 #include "MainMenu.h"
+#include "Persistence.h"
 #include "roadcruiser_xl.c"
+#include "wifiIndicator.c"
 #include "tcombi.c"
 #include "airHeater.c"
 #include "waterHeater.c"
@@ -34,6 +36,9 @@ const uint16_t batteryW = 55;
 const uint16_t batteryH = 40;
 const uint16_t batteryPoleW = 12; // battery pole hight
 const uint16_t batteryPoleH = 5; // battery pole width
+
+const uint16_t wifiIndiactorX = 285;
+const uint16_t wifiIndiactorY = 3;
 
 
 void MainMenu::printScreenImplementation(void) {
@@ -60,6 +65,17 @@ void MainMenu::printScreenImplementation(void) {
 }
 
 void MainMenu::updateScreenImplementation(void) {
+
+        if (Persistence::getInstance().readSlotBoolean(kPSlotWiFiOnOff) != lastWifiOnOffConfig
+        || lastWifiState != WiFiController::getInstance().getState()) {
+                lastWifiOnOffConfig = Persistence::getInstance().readSlotBoolean(kPSlotWiFiOnOff);
+                lastWifiState = WiFiController::getInstance().getState();
+                if (lastWifiOnOffConfig && lastWifiState == kWclsWifiUpAndRunning) {
+                        drawCompressedImage(wifiIndiactorX, wifiIndiactorY, reinterpret_cast<const RleImage*>(&wifiIndicator));
+                } else {
+                        adaIli9431->fillRect(wifiIndiactorX, wifiIndiactorY, wifiIndicator.width, wifiIndicator.height, Defaults.getBgColor());   
+                }
+        }
         menuBattStat->updateBatteryIndicator(batteryX, batteryY, batteryW, batteryH);
 }
 

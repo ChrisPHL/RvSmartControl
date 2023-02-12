@@ -20,12 +20,16 @@
 
 #include "debug.h"
 #include "MenuItem.h"
+#include "WiFiController.h"
 #include "MenuBatteryStatus.h"
 
 
 class MainMenu : public MenuItem {
 
 private:
+
+bool lastWifiOnOffConfig = false;
+WiFiControllerLoopState lastWifiState = kWclsIdle;
 
 void printScreenImplementation(void);
 void updateScreenImplementation(void);
