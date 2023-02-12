@@ -39,7 +39,7 @@ void MultiSensor::setup(void) {
                                    Adafruit_BMP280::SAMPLING_X4,   /* Temp. oversampling */
                                    Adafruit_BMP280::SAMPLING_X16,   /* Pressure oversampling */
                                    Adafruit_BMP280::FILTER_X16,   /* Filtering. */
-                                   Adafruit_BMP280::STANDBY_MS_500);   /* Standby time. */
+                                   Adafruit_BMP280::STANDBY_MS_500);   /* Standby time. (One new measurement every 500 ms.) */
         } else {
                 Serial.println("BMP280 initialization failed.");
         }

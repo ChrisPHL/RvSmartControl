@@ -66,8 +66,8 @@ const uint8_t I2C_SDA_PIN = 21;
 const uint8_t I2C_SCL_PIN = 22;
 const uint8_t BMP280_MPU9250_PIN_PWR = 13;
 const uint8_t BMP280_MPU9250_PIN_SAO = 15;
-const uint8_t BMP280_I2C_ADDRESS = 0x77;
-const uint8_t MPU9250_I2C_ADDRESS = 0x69;
+const uint8_t BMP280_I2C_ADDRESS = 0x76;
+const uint8_t MPU9250_I2C_ADDRESS = 0x68;
 MultiSensor multiSensor(I2C_SDA_PIN, I2C_SCL_PIN, BMP280_MPU9250_PIN_PWR, BMP280_MPU9250_PIN_SAO, BMP280_I2C_ADDRESS, MPU9250_I2C_ADDRESS);
 
 //######################################
